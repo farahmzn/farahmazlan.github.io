@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farah Mazlan — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:       #0d9488;
+      --teal-light: #14b8a6;
+      --teal-dim:   #ccfbf1;
+      --bg:         #f8fffe;
+      --surface:    #ffffff;
+      --text:       #0f172a;
+      --muted:      #64748b;
+      --border:     #e2e8f0;
+      --tag-bg:     #f0fdfa;
+      --tag-border: #99f6e4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(248,255,254,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 5vw;
+      height: 58px;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 1.1rem;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.85rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* HERO */
+    .hero {
+      max-width: 760px; margin: 0 auto;
+      padding: 90px 5vw 70px;
+    }
+    .hero-eyebrow {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::after {
+      content: ''; display: block;
+      width: 40px; height: 1.5px;
+      background: var(--teal-light);
+    }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -1px; color: var(--text);
+      margin-bottom: 18px;
+    }
+    .hero h1 span { color: var(--teal); }
+    .hero-sub {
+      color: var(--muted); font-size: 1rem;
+      max-width: 520px; margin-bottom: 32px;
+    }
+    .hero-links { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--teal); color: #fff;
+    }
+    .btn-primary:hover { background: #0b7a70; }
+    .btn-outline {
+      background: transparent; color: var(--teal);
+      border: 1.5px solid var(--teal-light);
+    }
+    .btn-outline:hover { background: var(--teal-dim); }
+
+    /* SECTIONS */
+    section { padding: 70px 5vw; }
+    .container { max-width: 760px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem; font-weight: 700;
+      letter-spacing: -0.5px; margin-bottom: 36px;
+    }
+
+    /* SKILLS */
+    #skills { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+    .skill-card {
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px 20px;
+      background: var(--bg);
+    }
+    .skill-card-label {
+      font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--teal); margin-bottom: 8px;
+    }
+    .skill-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    /* PROJECTS */
+    .projects-list { display: flex; flex-direction: column; gap: 24px; }
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 26px 28px;
+      background: var(--surface);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      border-color: var(--teal-light);
+      box-shadow: 0 4px 20px rgba(13,148,136,0.08);
+    }
+    .project-card-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 12px; margin-bottom: 10px;
+    }
+    .project-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--text);
+    }
+    .project-badge {
+      font-size: 0.68rem; font-weight: 600;
+      background: var(--teal-dim); color: var(--teal);
+      border: 1px solid var(--tag-border);
+      border-radius: 20px; padding: 3px 10px;
+      white-space: nowrap;
+    }
+    .project-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 14px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      font-size: 0.72rem; font-weight: 500;
+      background: var(--tag-bg); color: var(--teal);
+      border: 1px solid var(--tag-border);
+      border-radius: 6px; padding: 3px 9px;
+    }
+
+    /* ACHIEVEMENTS */
+    #achievements { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .ach-list { display: flex; flex-direction: column; gap: 16px; }
+    .ach-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 18px 20px;
+      border: 1px solid var(--border); border-radius: 10px;
+      background: var(--bg);
+    }
+    .ach-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--teal-dim); color: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .ach-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 3px; }
+    .ach-sub { font-size: 0.78rem; color: var(--muted); }
+
+    /* PUBLICATIONS */
+    .pub-list { display: flex; flex-direction: column; gap: 16px; }
+    .pub-item {
+      padding: 18px 20px; border-left: 3px solid var(--teal);
+      background: var(--surface); border-radius: 0 10px 10px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+    .pub-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 5px; }
+    .pub-meta { font-size: 0.78rem; color: var(--muted); }
+
+    /* CONTACT */
+    #contact { background: var(--teal); }
+    #contact .section-label { color: #99f6e4; }
+    #contact .section-title { color: #fff; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .contact-item {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px; padding: 16px 18px;
+      text-decoration: none; color: #fff;
+      display: flex; flex-direction: column; gap: 4px;
+      transition: background 0.2s;
+    }
+    .contact-item:hover { background: rgba(255,255,255,0.18); }
+    .contact-item-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
+    .contact-item-val { font-size: 0.88rem; font-weight: 500; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 28px 5vw;
+      font-size: 0.78rem; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 16px; }
+      .hero { padding: 60px 20px 50px; }
+      section { padding: 50px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">FM.</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">IT Student · Data & System Enthusiast</div>
+  <h1>Hi, I'm <span>Farah Mazlan</span> —<br/>I build data systems<br/>that make sense.</h1>
+  <p class="hero-sub">
+    Business Intelligence & Analytics student at IIUM. CompTIA Data+ certified.
+    I work across IoT hardware, cloud pipelines, and interactive dashboards.
+  </p>
+  <div class="hero-links">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="mailto:farahmazlan88@gmail.com" class="btn btn-outline">Get in Touch</a>
+    <a href="https://drive.google.com/file/d/1bo4RgmvaE_IaOm8ecIGPyWrjMCA6n5AR/view" target="_blank" class="btn btn-outline">📄 Resume</a>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">What I work with</div>
+    <div class="section-title">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-label">Data Analysis</div>
+        <p>Excel, Power Query, Data Cleaning, Data Visualization</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Business Intelligence</div>
+        <p>Power BI, Tableau</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Database</div>
+        <p>Oracle SQL, PL/SQL, SSMS</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Data Engineering</div>
+        <p>ETL, SSIS, Data Warehousing</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Statistics</div>
+        <p>R, Hypothesis Testing, Regression Analysis</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Programming</div>
+        <p>SQL, R, JavaScript, React, TypeScript</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">IoT & Embedded</div>
+        <p>ESP32, MQTT, ThingsBoard, Firebase, Arduino IDE</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">What I've built</div>
+    <div class="section-title">Major Projects</div>
+    <div class="projects-list">
+
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-title">HydriX — Early Flood Detection System</div>
+          <span class="project-badge">Final Year Project</span>
+        </div>
+        <p class="project-desc">
+          Full-stack IoT flood detection system using ESP32 with ultrasonic, rainfall, and DHT11 sensors.
+          Sensor data flows via MQTT → ThingsBoard → Render backend → Firebase. 
+          Web dashboard on Vercel with real-time readings, threshold-based email alerts via SendGrid, and an admin panel for user management.
+        </p>
+        <div class="tag-row">
+          <span class="tag">ESP32</span><span class="tag">MQTT</span><span class="tag">ThingsBoard</span>
+          <span class="tag">Firebase</span><span class="tag">React</span><span class="tag">Vercel</span><span class="tag">Render</span><span class="tag">SendGrid</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-title">Business Data Analytics — Coffee Shop Sales</div>
+        </div>
+        <p class="project-desc">
+          Analysed revenue trends, peak trading hours, and product performance across 3 New York store locations.
+          Built an interactive Excel dashboard with PivotCharts and slicers for dynamic filtering.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Microsoft Excel</span><span class="tag">PivotCharts</span><span class="tag">Data Analysis</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-title">Fast Fashion Environmental Impact — Tableau</div>
+        </div>
+        <p class="project-desc">
+          Analyzed fast fashion data to identify environmental and social impacts across production stages.
+          Built an interactive Tableau dashboard to visualize pollution trends, labor concerns, and waste contribution.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Tableau</span><span class="tag">Data Visualization</span><span class="tag">Environmental Analytics</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-title">Data Warehouse & Dashboard Management</div>
+        </div>
+        <p class="project-desc">
+          Designed and implemented a multi-source data warehouse with ETL pipelines using SSIS and SQL Server.
+          Developed Power BI dashboards presenting KPIs, trends, and business insights.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Power BI</span><span class="tag">SSIS</span><span class="tag">SSMS</span><span class="tag">ETL</span><span class="tag">Excel</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-title">Data Mining — Student Club Participation</div>
+        </div>
+        <p class="project-desc">
+          Applied descriptive and inferential statistical techniques in R to identify behavioral patterns
+          influencing student engagement in university clubs.
+        </p>
+        <div class="tag-row">
+          <span class="tag">R Language</span><span class="tag">Data Mining</span><span class="tag">Statistics</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-title">Bakery Management System</div>
+        </div>
+        <p class="project-desc">
+          Designed a database system to manage sales, inventory, and employee records using Oracle SQL and PL/SQL.
+          Applied stored procedures and functions to automate reporting and monitor stock availability.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Oracle SQL</span><span class="tag">PL/SQL</span><span class="tag">phpMyAdmin</span><span class="tag">XAMPP</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-label">Recognition</div>
+    <div class="section-title">Achievements & Leadership</div>
+    <div class="ach-list">
+      <div class="ach-item">
+        <div class="ach-icon">🥈</div>
+        <div>
+          <div class="ach-title">Silver Award — Open International Innovation Challenge (OpIIC 2024)</div>
+          <div class="ach-sub">Recognized for innovative project performance at international level</div>
+        </div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-icon">🎤</div>
+        <div>
+          <div class="ach-title">Conference Presenter — SITWE 2024, Multimedia University (MMU)</div>
+          <div class="ach-sub">Presented research at the 1st International Symposium on Information Technology and Web Engineering</div>
+        </div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-icon">👑</div>
+        <div>
+          <div class="ach-title">Vice President — IoTeams Club (2025)</div>
+          <div class="ach-sub">Led planning of technical events, workshops, and IoT learning initiatives</div>
+        </div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-icon">🎓</div>
+        <div>
+          <div class="ach-title">Dean's List — Two Semesters</div>
+          <div class="ach-sub">International Islamic University Malaysia (IIUM)</div>
+        </div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-icon">📜</div>
+        <div>
+          <div class="ach-title">CompTIA Data+ Certified</div>
+          <div class="ach-sub">Industry-recognized data analytics certification</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="container">
+    <div class="section-label">Research</div>
+    <div class="section-title">Publications</div>
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-title">Comprehensive Insights into Smart Contracts: Architecture, Sectoral Applications, Security Analysis, and Legal Frameworks</div>
+        <div class="pub-meta">Mazlan, F. (2025) · Journal of Informatics and Web Engineering, 4(1), 1–17</div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-title">Agrilink: Design and Evaluation of an IoT-Based Smart Agriculture System for Plant Watering and Humidification</div>
+        <div class="pub-meta">Mazlan, F. (2025) · Malaysian Journal of Science and Advanced Technology</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Let's connect</div>
+    <div class="section-title">Get In Touch</div>
+    <div class="contact-grid">
+      <a href="mailto:farahmazlan88@gmail.com" class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <span class="contact-item-val">farahmazlan88@gmail.com</span>
+      </a>
+      <a href="tel:+60197687461" class="contact-item">
+        <span class="contact-item-label">Phone</span>
+        <span class="contact-item-val">+6019-7687461</span>
+      </a>
+      <a href="https://drive.google.com/file/d/1bo4RgmvaE_IaOm8ecIGPyWrjMCA6n5AR/view" target="_blank" class="contact-item">
+        <span class="contact-item-label">Resume</span>
+        <span class="contact-item-val">View PDF →</span>
+      </a>
+      <div class="contact-item" style="cursor:default">
+        <span class="contact-item-label">Location</span>
+        <span class="contact-item-val">Kulim, Kedah · Malaysia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Farah Binti Mazlan · Built with HTML & CSS · Hosted on GitHub Pages
+</footer>
+
+</body>
+</html>
